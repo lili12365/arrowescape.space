@@ -1,0 +1,18 @@
+{
+  "name": "arrowescape-online",
+  "version": "1.0.0",
+  "description": "Arrow Escape - Free Online Arrow Puzzle Game",
+  "scripts": {
+    "deploy": "wrangler pages deploy ."
+  },
+  "keywords": [
+    "arrow-escape",
+    "puzzle-game",
+    "html5-game"
+  ],
+  "author": "ArrowEscape.online",
+  "license": "MIT"
+}
+
+
+

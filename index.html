@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Arrow Escape - Free Online Arrow Puzzle Game. Solve challenging arrow exit puzzles, tap away arrows, and clear arrow grids. HTML5 unblocked game available now!">
+    <meta name="keywords" content="arrow escape, arrow puzzle, play arrow escape online free, arrow puzzle html5 unblocked, arrow exit puzzle, escape arrow puzzle, arrow maze escape, arrow logic puzzle">
+    <meta name="author" content="ArrowEscape.online">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://arrowescape.online/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arrowescape.online/">
+    <meta property="og:title" content="Arrow Escape Games - Free Online Puzzle">
+    <meta property="og:description" content="Play Arrow Escape - Free Online Arrow Puzzle Game. Solve challenging arrow exit puzzles and clear arrow grids.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://arrowescape.online/">
+    <meta property="twitter:title" content="Arrow Escape Games - Free Online Puzzle">
+    <meta property="twitter:description" content="Play Arrow Escape - Free Online Arrow Puzzle Game. Solve challenging arrow exit puzzles and clear arrow grids.">
+    
+    <title>Arrow Escape Games - Free Online Puzzle | Play Arrow Escape Online Free</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Background Image with Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpg'); /* 请将图片命名为 background.jpg 或修改路径 */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 27, 75, 0.9) 50%, rgba(15, 23, 42, 0.85) 100%);
+            z-index: -1;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .game-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                padding-bottom: 75%; /* 4:3 for mobile */
+                border-radius: 16px;
+            }
+            
+            body::before {
+                background-attachment: scroll;
+            }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(99, 102, 241, 0.2);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .glass-card-dark {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        .section-spacing {
+            margin-bottom: 6rem;
+        }
+        
+        @media (max-width: 768px) {
+            .section-spacing {
+                margin-bottom: 4rem;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Smooth scroll offset for fixed header */
+        section[id] {
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="glass-card sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-5">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-xl flex items-center justify-center glow-effect">
+                        <span class="text-white font-bold text-2xl">→</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                        Arrow Escape Puzzle
+                    </h1>
+                </div>
+                <div class="text-sm font-medium text-gray-700">
+                    <span class="hidden md:inline">Free Online Game</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <section class="section-spacing text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl">
+                    <p class="text-xl md:text-2xl text-gray-800 mb-6 leading-relaxed font-medium">
+                        Play <span class="font-bold text-blue-600">Arrow Escape</span> online free - the ultimate arrow puzzle game that challenges your logic and problem-solving skills. Tap away arrows and clear arrow grids in this minimalist HTML5 unblocked puzzle experience.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-3 mt-6">
+                        <span class="px-4 py-2 bg-gradient-to-r from-cyan-100 to-blue-100 text-blue-700 rounded-full text-sm font-semibold">Free to Play</span>
+                        <span class="px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-semibold">No Download</span>
+                        <span class="px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold">HTML5 Unblocked</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="game" class="section-spacing">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 text-glow">Play Now</h2>
+                    <p class="text-gray-300 text-lg">Click to start playing Arrow Escape Puzzle</p>
+                </div>
+                <div class="game-container glow-effect">
+                    <iframe 
+                        src="https://games.crazygames.com/en_US/arrow-exit-puzzle/index.html"
+                        allow="autoplay; fullscreen; gamepad"
+                        allowfullscreen
+                        title="Arrow Escape Puzzle Game">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Description -->
+        <section class="section-spacing">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 text-center text-glow">About Arrow Escape Puzzle</h2>
+                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl">
+                    <p class="text-gray-800 leading-relaxed mb-5 text-lg">
+                        <span class="font-semibold text-blue-600">Arrow Escape</span> is a captivating arrow exit puzzle game that combines logic, strategy, and spatial reasoning. In this engaging arrow puzzle HTML5 unblocked game, players must navigate through challenging levels by strategically moving arrows to create a clear path to the exit.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed mb-5 text-lg">
+                        The game features a minimalist arrow puzzle design that focuses on pure gameplay mechanics. Each level presents a unique arrow maze escape challenge where you must think carefully about arrow placement and movement. Whether you're tackling arrow escape level 247 or starting from the beginning, the game offers progressively difficult arrow logic puzzle scenarios.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-lg">
+                        This relaxing arrow escape game is perfect for players who enjoy daily arrow challenges and brain-teasing puzzles. The tap away arrow puzzle mechanics make it easy to play on both desktop and mobile devices, ensuring a seamless gaming experience across all platforms.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section-spacing">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center text-glow">Game Features</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                    <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mb-5 glow-effect">
+                        <span class="text-3xl">🧩</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Arrow Logic Puzzle</h3>
+                    <p class="text-gray-700 leading-relaxed">Challenge your mind with intricate arrow logic puzzles that require strategic thinking and careful planning.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center mb-5 glow-effect">
+                        <span class="text-3xl">📱</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">HTML5 Unblocked</h3>
+                    <p class="text-gray-700 leading-relaxed">Play arrow puzzle HTML5 unblocked anywhere, anytime. No downloads or installations required.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center mb-5 glow-effect">
+                        <span class="text-3xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Clear Arrow Grid</h3>
+                    <p class="text-gray-700 leading-relaxed">Master the art of clearing arrow grids with precision and efficiency in each level.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center mb-5 glow-effect">
+                        <span class="text-3xl">🌟</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Minimalist Design</h3>
+                    <p class="text-gray-700 leading-relaxed">Enjoy a minimalist arrow puzzle experience with clean visuals and intuitive gameplay.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                    <div class="w-14 h-14 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center mb-5 glow-effect">
+                        <span class="text-3xl">🎮</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Tap Away Arrow Puzzle</h3>
+                    <p class="text-gray-700 leading-relaxed">Simple tap controls make it easy to play arrow escape games on any device.</p>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                    <div class="w-14 h-14 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl flex items-center justify-center mb-5 glow-effect">
+                        <span class="text-3xl">🏆</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Daily Challenges</h3>
+                    <p class="text-gray-700 leading-relaxed">Test your skills with daily arrow challenges and see how far you can progress.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Play Section -->
+        <section id="how-to-play" class="section-spacing">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-10 text-center text-glow">How to Play Arrow Escape</h2>
+                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl bg-gradient-to-br from-blue-50/90 to-purple-50/90">
+                    <ol class="space-y-6 text-gray-800">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl flex items-center justify-center font-bold text-lg mr-5 shadow-lg glow-effect">1</span>
+                            <p class="pt-2 text-lg leading-relaxed">Start by analyzing the arrow maze escape layout. Identify the starting point and the exit location.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl flex items-center justify-center font-bold text-lg mr-5 shadow-lg glow-effect">2</span>
+                            <p class="pt-2 text-lg leading-relaxed">Tap or click on arrows to move them strategically. Plan your moves to create a clear path through the arrow exit puzzle.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl flex items-center justify-center font-bold text-lg mr-5 shadow-lg glow-effect">3</span>
+                            <p class="pt-2 text-lg leading-relaxed">Clear the arrow grid by removing obstacles and creating a direct route to the escape point.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl flex items-center justify-center font-bold text-lg mr-5 shadow-lg glow-effect">4</span>
+                            <p class="pt-2 text-lg leading-relaxed">Progress through levels, with each arrow escape level presenting new challenges and increasing difficulty.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips & Strategy Section -->
+        <section id="tips" class="section-spacing">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-10 text-center text-glow">Arrow Escape Strategy Tips</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                        <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-white font-bold">💡</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Think Ahead</h3>
+                        <p class="text-gray-700 leading-relaxed">In arrow logic puzzles, always consider the consequences of each move. Plan multiple steps ahead to avoid getting stuck.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                        <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-white font-bold">🔄</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Work Backwards</h3>
+                        <p class="text-gray-700 leading-relaxed">Sometimes it's easier to solve arrow maze escape puzzles by starting from the exit and working your way back.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-white font-bold">🗑️</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Clear Obstacles First</h3>
+                        <p class="text-gray-700 leading-relaxed">Remove blocking arrows early in the game to open up more movement options for solving the arrow exit puzzle.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl card-hover">
+                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-4">
+                            <span class="text-white font-bold">📅</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Practice Daily</h3>
+                        <p class="text-gray-700 leading-relaxed">Regular practice with daily arrow challenges helps improve your problem-solving speed and pattern recognition.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Play Section -->
+        <section class="section-spacing">
+            <div class="max-w-5xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">Why Play Arrow Escape Online Free?</h2>
+                    <div class="space-y-6">
+                        <p class="text-gray-800 leading-relaxed text-lg">
+                            <span class="font-semibold text-purple-600">Arrow Escape</span> offers a unique blend of relaxation and mental stimulation. This relaxing arrow escape game provides the perfect escape from daily stress while keeping your mind sharp. The minimalist arrow puzzle design ensures that gameplay remains the focus, without unnecessary distractions.
+                        </p>
+                        <p class="text-gray-800 leading-relaxed text-lg">
+                            Whether you're looking to play arrow escape online free during a break, or seeking a challenging arrow puzzle HTML5 unblocked game for extended play sessions, Arrow Escape delivers an engaging experience. The game's progressive difficulty ensures that both beginners and experienced puzzle enthusiasts will find appropriate challenges.
+                        </p>
+                        <p class="text-gray-800 leading-relaxed text-lg">
+                            With its intuitive tap away arrow puzzle mechanics and beautiful visual design, Arrow Escape stands out as one of the best arrow logic puzzle games available online. Start playing today and see how many levels you can complete!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section-spacing">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-10 text-center text-glow">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-7 shadow-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Is Arrow Escape completely free to play?</h3>
+                        <p class="text-gray-700 leading-relaxed">Yes, Arrow Escape is completely free to play. There are no hidden costs, subscriptions, or in-app purchases. You can play arrow escape online free without any restrictions or limitations.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Do I need to download anything to play Arrow Escape?</h3>
+                        <p class="text-gray-700 leading-relaxed">No downloads are required. Arrow Escape is an HTML5 unblocked game that runs directly in your web browser. Simply visit our website and start playing immediately on any device with an internet connection.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Can I play Arrow Escape on mobile devices?</h3>
+                        <p class="text-gray-700 leading-relaxed">Absolutely! Arrow Escape is fully optimized for mobile devices. The tap away arrow puzzle mechanics work perfectly on touchscreens, making it easy to play on smartphones and tablets.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">How many levels does Arrow Escape have?</h3>
+                        <p class="text-gray-700 leading-relaxed">Arrow Escape features numerous levels with increasing difficulty. Players can progress through arrow escape level 247 and beyond, with each level presenting unique arrow maze escape challenges.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">What makes Arrow Escape different from other puzzle games?</h3>
+                        <p class="text-gray-700 leading-relaxed">Arrow Escape stands out with its minimalist arrow puzzle design, intuitive tap controls, and focus on pure logic and strategy. The arrow logic puzzle mechanics require careful planning and spatial reasoning, making it both challenging and rewarding.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-7 shadow-xl">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Is my progress saved when playing Arrow Escape?</h3>
+                        <p class="text-gray-700 leading-relaxed">Arrow Escape uses browser-based local storage to save your progress automatically. Your level progress and achievements are saved locally on your device, so you can continue where you left off.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gameplay Details Section -->
+        <section class="section-spacing">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-10 text-center text-glow">Mastering Arrow Escape: Advanced Strategies</h2>
+                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Understanding Arrow Movement Mechanics</h3>
+                            <p class="text-gray-800 leading-relaxed text-lg mb-4">
+                                In Arrow Escape, each arrow follows specific movement rules that create the foundation of the arrow logic puzzle. When you tap or click an arrow, it moves in its designated direction until it encounters an obstacle or reaches the edge of the grid. Understanding these mechanics is crucial for solving arrow exit puzzles efficiently.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed text-lg">
+                                The key to mastering arrow maze escape challenges lies in recognizing patterns. Many levels feature similar arrow arrangements that can be solved using consistent strategies. By identifying these patterns early, you can quickly navigate through multiple arrow escape levels without getting stuck.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Optimizing Your Solving Approach</h3>
+                            <p class="text-gray-800 leading-relaxed text-lg mb-4">
+                                Successful players of arrow puzzle HTML5 unblocked games often employ a systematic approach. Start by examining the entire arrow grid layout before making any moves. Identify which arrows are blocking potential paths and prioritize clearing those obstacles first.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed text-lg">
+                                When tackling challenging arrow escape level 247 or similar advanced stages, consider working backwards from the exit point. This reverse-engineering approach helps you understand the final arrow configuration needed and plan your moves accordingly. The tap away arrow puzzle format makes it easy to experiment with different strategies without penalty.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Building Pattern Recognition Skills</h3>
+                            <p class="text-gray-800 leading-relaxed text-lg mb-4">
+                                Regular practice with daily arrow challenges significantly improves your problem-solving abilities. As you play arrow escape online free, you'll begin to recognize common arrow arrangements and their solutions. This pattern recognition becomes invaluable when facing new arrow logic puzzle scenarios.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed text-lg">
+                                The minimalist arrow puzzle design ensures that your focus remains on the core gameplay mechanics. Without visual distractions, you can concentrate on developing your spatial reasoning and strategic thinking skills. This makes Arrow Escape an excellent choice for players seeking a relaxing arrow escape game that also provides mental stimulation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card-dark mt-20 py-12 border-t border-purple-500/20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">→</span>
+                        </div>
+                        <h3 class="text-white font-bold text-lg">Arrow Escape</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">The ultimate free online arrow puzzle game. Play arrow escape online free and enjoy hours of brain-teasing fun.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#game" class="text-gray-300 hover:text-cyan-400 transition duration-300">Play Game</a></li>
+                        <li><a href="#how-to-play" class="text-gray-300 hover:text-cyan-400 transition duration-300">How to Play</a></li>
+                        <li><a href="#tips" class="text-gray-300 hover:text-cyan-400 transition duration-300">Game Tips</a></li>
+                        <li><a href="#faq" class="text-gray-300 hover:text-cyan-400 transition duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Legal</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#privacy" class="text-gray-300 hover:text-cyan-400 transition duration-300">Privacy Policy</a></li>
+                        <li><a href="#terms" class="text-gray-300 hover:text-cyan-400 transition duration-300">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">About</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">Arrow Escape is a free HTML5 unblocked puzzle game. Play arrow puzzle games online without any downloads or registration required.</p>
+                </div>
+            </div>
+            <div class="border-t border-purple-500/20 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; 2024 ArrowEscape.online. All rights reserved. Play arrow escape online free - the best arrow puzzle HTML5 unblocked game.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Section -->
+    <section id="privacy" class="glass-card-dark py-16 border-t border-purple-500/20">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 text-center text-glow">Privacy Policy</h2>
+            <div class="glass-card rounded-2xl p-8 md:p-10 shadow-2xl">
+                <p class="text-gray-600 text-sm mb-6">Last Updated: December 2024</p>
+                
+                <div class="space-y-6 text-gray-800">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Information We Collect</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            ArrowEscape.online is committed to protecting your privacy. When you play Arrow Escape online free, we may collect certain information automatically, including your IP address, browser type, device information, and usage data. This information helps us improve the game experience and ensure our arrow puzzle HTML5 unblocked game functions properly.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">How We Use Your Information</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            The information we collect is used to provide, maintain, and improve our services. We use it to analyze how players interact with Arrow Escape, optimize game performance, and ensure the arrow logic puzzle game runs smoothly across different devices and browsers.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Cookies and Local Storage</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Arrow Escape uses browser local storage to save your game progress, including your current level and achievements. This allows you to continue playing arrow escape level 247 or any other level where you left off. We do not use tracking cookies for advertising purposes without your consent.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Third-Party Services</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Our website may use third-party services, including Google AdSense, to display advertisements. These services may use cookies and similar technologies to provide personalized ads based on your browsing behavior. You can opt out of personalized advertising through your browser settings or by visiting the Network Advertising Initiative opt-out page.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Data Security</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            We implement appropriate security measures to protect your information. However, no method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Children's Privacy</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Arrow Escape is suitable for players of all ages. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Changes to This Policy</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Contact Us</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            If you have any questions about this Privacy Policy, please contact us through our website. We are committed to addressing your concerns and ensuring your privacy while you enjoy playing arrow escape online free.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms of Service Section -->
+    <section id="terms" class="glass-card-dark py-16 border-t border-purple-500/20">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 text-center text-glow">Terms of Service</h2>
+            <div class="glass-card rounded-2xl p-8 md:p-10 shadow-2xl">
+                <p class="text-gray-600 text-sm mb-6">Last Updated: December 2024</p>
+                
+                <div class="space-y-6 text-gray-800">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Acceptance of Terms</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            By accessing and playing Arrow Escape on ArrowEscape.online, you accept and agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not access or use our arrow puzzle HTML5 unblocked game.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Use of Service</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Arrow Escape is provided as a free online game for your personal, non-commercial entertainment. You may play arrow escape online free without registration or payment. The game, including all arrow logic puzzle mechanics and content, is protected by copyright and other intellectual property laws.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">User Conduct</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            You agree to use Arrow Escape responsibly and in accordance with applicable laws. You may not attempt to modify, reverse engineer, or interfere with the game's functionality. Any attempt to cheat, exploit bugs, or manipulate the arrow maze escape gameplay is strictly prohibited.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Intellectual Property</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            All content on ArrowEscape.online, including the Arrow Escape game, graphics, text, and logos, is the property of ArrowEscape.online or its licensors. The arrow puzzle game mechanics and design are protected by copyright. You may not reproduce, distribute, or create derivative works without express written permission.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Disclaimer of Warranties</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Arrow Escape is provided "as is" without warranties of any kind, either express or implied. We do not guarantee that the arrow escape online free game will be uninterrupted, error-free, or free from viruses or other harmful components. Your use of the service is at your own risk.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Limitation of Liability</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            ArrowEscape.online shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of Arrow Escape or inability to access the arrow puzzle HTML5 unblocked game. This includes but is not limited to loss of data, game progress, or profits.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Modifications to Service</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            We reserve the right to modify, suspend, or discontinue Arrow Escape at any time without notice. We may update the game, add new arrow escape levels, or make changes to improve the arrow logic puzzle experience. We are not obligated to maintain or support any specific version of the game.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Third-Party Content</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Arrow Escape may contain links to third-party websites or display advertisements from third-party services, including Google AdSense. We are not responsible for the content, privacy policies, or practices of these third-party services. Your interactions with advertisers are solely between you and the advertiser.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Changes to Terms</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting. Your continued use of Arrow Escape after changes are posted constitutes acceptance of the modified terms. We encourage you to review these terms periodically.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Contact Information</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            If you have questions about these Terms of Service, please contact us through our website. We are committed to providing a fair and enjoyable gaming experience for all players who choose to play arrow escape online free.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+
